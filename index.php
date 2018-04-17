@@ -95,7 +95,7 @@ li
           <a class="dropdown-item" href="info.php?id=15&sub_id=15">Chemists</a>
       </li>
       <li class="nav-item ">
-
+        <a href="CreateEvent.php" class="nav-link">Create Event</a>
       </li>
 
     </ul>
@@ -307,6 +307,7 @@ window.onload = function(){
           minZoom:12
 });
   }
+
   var getLatLng = function(_lat,_lng)
   {
     var _location = {

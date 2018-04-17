@@ -36,14 +36,14 @@
                 <label for="event_description"> <span  style="color:#aea;font-weight:bold;font-size:24px">E</span>vent  <span  style="color:#aea;font-weight:bold;font-size:24px">D</span>escription</label>
                 <textarea  name="description" rows=10 id="event_description" placeholder="Enter description of event max words 255..." class="form-control" value="" maxlength="255" required></textarea>
             </div>
-        <!--  <div class="form-group">
+         <div class="form-group">
               <label for="event_location">Location Selected</label>
               <input type="text" id="event_location" class="form-control" disabled value="" />
-        </div>-->
+        </div>
 
-        <!--  <div class="form-group">
+         <div class="form-group">
             <input type="text" style="display:none" id="event_location_id" name="location" value="" />
-        </div>-->
+        </div>
 
         <div class="form-group">
             <button type="submit" class="btn btn-success pull-right"><i class="fa fa-paper-plane-o"></i> </button>
@@ -75,8 +75,8 @@
               zoom:12,
               minZoom:12
             });
+        };
         }
-
           /*
             AJAX => Asynchronous Javascript And XML Request Initialized when document is loaded
           */
@@ -93,8 +93,10 @@
                       var marker = new google.maps.Marker({
                           position:new google.maps.LatLng(loc.lat,loc.lng),
                           title:loc.name,
+                          animation:google.maps.Animation.DROP,
                           map:map
                       });
+
                     marker.addListener('click',function(){
                         var event_location = document.getElementById('event_location');
                         event_location.value= marker.title;
