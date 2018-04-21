@@ -2,12 +2,6 @@
 include('includes/config.php');
 $QUERY  = "SELECT * FROM events ORDER BY id DESC LIMIT 9";
 $RESULT = mysqli_query($conn,$QUERY);
-
-
-
-
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">

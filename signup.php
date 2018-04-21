@@ -1,55 +1,83 @@
-<?php
-
-
-
-
-
-
-
-
-
-?>
-<!DOCTYPE html>
-<html>
-  <head>
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
+<head>
     <meta charset="utf-8">
-    <title>GIS LOGIN</title>
-    <?php include('lib.php'); ?>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  </head>
-  <body>
-    <center>
-    <h1 >signup</h1>
-  </center>
-    <div class="container">
-          <div class="row">
-              <div class="col-sm-12 col-lg-12 col-md-12 col-xs-12">
-                    <center>
-                        <form action="register.php" method="post">
-                          <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Name" name="name" required value="">
-                          </div>
-                            <div class="form-group">
-                                  <input type="email" class="form-control" placeholder="Type Email" name="email" required value="">
-                            </div>
-                            <div class="form-group">
-                                  <input type="password" class="form-control" placeholder="Type Password" name="password" required value="">
-                            </div>
-                            <div class="form-group">
-                                  <input type="password" class="form-control" placeholder="Retype Password" name="password2" required value="">
-                            </div>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Sufee Admin - HTML5 Admin Template</title>
+    <meta name="description" content="Sufee Admin - HTML5 Admin Template">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-                              <button type="submit" class="btn btn-success float-right"> <i class="fa fa-paper-plane-o"></i> </button>
-                        </form>
-                    </center>
-              </div>
-          </div>
+    <link rel="apple-touch-icon" href="apple-icon.png">
+    <link rel="shortcut icon" href="favicon.ico">
+
+    <link rel="stylesheet" href="admin/assets/css/normalize.css">
+    <link rel="stylesheet" href="admin/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="admin/assets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="admin/assets/css/themify-icons.css">
+    <link rel="stylesheet" href="admin/assets/css/flag-icon.min.css">
+    <link rel="stylesheet" href="admin/assets/css/cs-skin-elastic.css">
+    <!-- <link rel="stylesheet" href="assets/css/bootstrap-select.less"> -->
+    <link rel="stylesheet" href="admin/assets/scss/style.css">
+
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
+
+</head>
+<body class="bg-dark">
+
+
+    <div class="sufee-login d-flex align-content-center flex-wrap">
+        <div class="container">
+            <div class="login-content">
+                <div class="login-logo">
+                    <a href="index.html">
+                      <center>
+                        <p style="font-size:24px;">
+                          GIS Wah Cantt Login
+                        </p>
+</center>
+
+                    </a>
+                </div>
+                <div class="login-form">
+                    <form action="register.php" method="post">
+                        <div class="form-group">
+                            <label>User Name</label>
+                            <input type="text" class="form-control" name="name" placeholder="User Name">
+                        </div>
+                        <div class="form-group">
+                            <label>Email address</label>
+                            <input type="email" class="form-control" name="email" placeholder="Email">
+                        </div>
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input type="password" class="form-control" name="password" placeholder="Password">
+                        </div>
+                        <div class="form-group">
+                            <label>Retype Password</label>
+                            <input type="password" class="form-control" name="password2" placeholder="Retype Password">
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-flat m-b-30 m-t-30">Register</button>
+                        <div class="register-link m-t-15 text-center">
+                            <p>Already have account ? <a href="login.php"> Sign in</a></p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 
 
+    <script src="admin/assets/js/vendor/jquery-2.1.4.min.js"></script>
+    <script src="admin/assets/js/popper.min.js"></script>
+    <script src="admin/assets/js/plugins.js"></script>
+    <script src="admin/assets/js/main.js"></script>
 
 
-
-
-  </body>
+</body>
 </html>

@@ -93,13 +93,14 @@ transform:scale(1);
 </style>
   <body>
 
-      <nav style="width:100%;height:60px;background-color:#eee;">
-
+      <nav style="width:100%;height:60px;background-color:#eee;padding:12px 24px">
+        <a href="index.php" style="font-size:18px;text-decoration:none;width:10%" class="btn btn-info"> Back </a>
+        <a href="logout.php" style="font-size:18px;text-decoration:none;width:10%;color:white" class="btn btn-warning"> Logout </a>
       </nav>
       <br>
           <div class="row">
-
               <div  class="card col-sm-12 col-xs-12 col-md-6 col-lg-6">
+
                     <div class="card-body">
                         <input type="hidden" id="get_count" value="<?php echo mysqli_num_rows($RESULT); ?>">
                         <input type="hidden" id="get_id" value="<?php echo $_id; ?>">
