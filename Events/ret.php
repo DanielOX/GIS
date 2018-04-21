@@ -1,8 +1,7 @@
 <?php
-$SERVER = "127.0.0.1";
+$SERVER = "localhost";
 $USER   = "root";
 $PASSWORD = "";
-
 $DB = "gis_data_wah_cantt";
 $conn = mysqli_connect($SERVER,$USER,$PASSWORD,$DB);
 if($conn)

@@ -162,7 +162,21 @@
                           animation:google.maps.Animation.DROP,
                           map:map
                       });
-                        markers.push(marker);
+                      markers.push(marker);
+
+                      var stringContent = '<div class="content"><p class="title" style="font-weight:bold">'+ loc.name +'</p><p class="Description">'+loc.description+'</p> <small class="pull-right">By:</small>&nbsp;<small style="font-size:14px">GIS</small></div>';
+                      var infoBOX = new google.maps.InfoWindow({
+                          content:stringContent
+                      });
+
+                      marker.addListener('mouseover',function(){
+                        infoBOX.open(map,marker);
+
+                      });
+                      marker.addListener('mouseout',function(){
+                        infoBOX.close(map,marker);
+
+                      });
                         marker.addListener('click',function(){
                         var event_location = document.getElementById('event_location');
                         event_location.value= marker.title;

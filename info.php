@@ -77,7 +77,6 @@ if($conn)
   animation-delay:.3s;
   animation-duration:0.5s;
 }
-
 @keyframes animx
 {
 from
@@ -169,7 +168,7 @@ transform:scale(1);
 
 <script>
 
-
+var markersCluster = [];
     var myMap = document.getElementById('myMap');
     var map;
     var markerArray = [];
@@ -181,9 +180,6 @@ transform:scale(1);
       zoom:13
     });
     }
-
-
-
 var http2 = new XMLHttpRequest();
 var get_id = document.getElementById('get_id').value;
 http2.onreadystatechange = function()
@@ -192,18 +188,37 @@ http2.onreadystatechange = function()
       {
           var parsed = JSON.parse(this.responseText);
           var increment = 1;
-          markerArray[0] = "";
-          parsed.forEach(function(x){
+          console.log(parsed);
+          parsed.forEach(function(loc){
             var marker = new google.maps.Marker({
-                position:new google.maps.LatLng(x.lat,x.lng),
+                position:new google.maps.LatLng(loc.lat,loc.lng),
                 animation:google.maps.Animation.DROP,
-                title:x.name,
+                title:loc.name,
                 map:map
             });
+            markersCluster.push(marker);
+              var infoBOX = new google.maps.InfoWindow({
+                content:'<div class="content" style="width:350px;height:180px"><p class="title" style="font-weight:bold">'+ loc.name +'</p><p class="Description">'+loc.description+'</p> <small class="pull-right">By:</small>&nbsp;<small style="font-size:14px">GIS</small></div>'
+            });
+            marker.addListener('mouseover',function(){
+              infoBOX.open(map,marker);
+
+            });
+            infoBOX.close(map,marker);
+            marker.addListener('mouseout',function(){
+            });
+            marker.addListener('click',function(){
+              infoBOX.open(map,marker);
+            });
+
             marker.set("id",increment);
             markerArray[increment] = marker;
             increment++;
           });
+
+
+
+
       }
 }
   http2.open('GET','get_location_from_category.php?cat_id='+get_id,true);
@@ -213,9 +228,11 @@ function colorChange(id)
 {
   markerArray[id].setIcon('icons/green.png');
   markerArray[id].setAnimation(google.maps.Animation.BOUNCE);
+  new google.maps.event.trigger(markerArray[id],'click');
   setTimeout(function(){
     markerArray[id].setAnimation(google.maps.Animation.BOUNCEx);
   },1690);
+
 }
 
 

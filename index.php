@@ -115,7 +115,7 @@ window.onload = function(){
                   animation:google.maps.Animation.DROP,
                   map:map
               });
-              var stringContent = '<div class="content"><p class="title" style="font-weight:bold">'+ loc.name +'</p><p class="Description">'+loc.description+'</p> <small class="pull-right">By:</small>&nbsp;<small style="font-size:14px">GIS</small></div>';
+              var stringContent = '<div class="content"><p class="title" style="font-weight:bold;">'+ loc.name +'</p><p class="Description">'+loc.description+'</p> <small class="pull-right">By:</small>&nbsp;<small style="font-size:14px">GIS</small></div>';
               var infoBOX = new google.maps.InfoWindow({
                   content:stringContent
               });
@@ -160,7 +160,7 @@ window.onload = function(){
       lat:_lat,
       lng:_lng
     };
-    map.setZoom(20);
+    map.setZoom(24);
     map.panTo( _location);
 
   }
