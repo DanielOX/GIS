@@ -1,6 +1,6 @@
 <?php
 $sub = $_GET['cat_id'];
-$SERVER = "localhost";
+$SERVER = "127.0.0.1";
 $USER   = "root";
 $PASSWORD = "";
 

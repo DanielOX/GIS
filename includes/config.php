@@ -1,17 +1,10 @@
 <?php
-$servername = "localhost";
+$servername = "127.0.0.1";
 $username = "root";
 $password = "";
-$dbname = "gis";
+$dbname = "gis_data_wah_cantt";
 
 // Create connection
-$db = mysqli_connect($servername, $username, $password, $dbname);
+$conn = mysqli_connect($servername, $username, $password, $dbname);
 // Check connection
-if ($db->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-} 
 ?>
-
-
-
- 

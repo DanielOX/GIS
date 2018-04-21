@@ -1,9 +1,9 @@
 <?php
-$conn = mysqli_connect('localhost','root','','gis_data_wah_cantt');
+$conn = mysqli_connect('127.0.0.1','root','','gis_data_wah_cantt');
 $value = strtoupper($_GET['search_value']);
 if($value != "")
 {
-  $query = "SELECT name,lat,lng FROM locations WHERE name LIKE '". $value."%'";
+  $query = "SELECT name,lat,lng,id FROM locations WHERE name LIKE '". $value."%'";
   $result = mysqli_query($conn,$query);
   if(mysqli_num_rows($result) > 0)
   {

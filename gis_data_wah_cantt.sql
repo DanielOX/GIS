@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.4
+-- version 4.7.7
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Apr 17, 2018 at 02:46 PM
--- Server version: 5.7.14
--- PHP Version: 7.0.10
+-- Host: 127.0.0.1:3306:3306
+-- Generation Time: Apr 18, 2018 at 12:03 AM
+-- Server version: 10.2.12-MariaDB
+-- PHP Version: 7.2.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -56,8 +58,19 @@ INSERT INTO `categories` (`id`, `name`) VALUES
 CREATE TABLE `events` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `description` varchar(255) NOT NULL
+  `description` varchar(255) NOT NULL,
+  `location` int(11) NOT NULL,
+  `image` varchar(255) NOT NULL,
+  `organizer` varchar(255) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `events`
+--
+
+INSERT INTO `events` (`id`, `name`, `description`, `location`, `image`, `organizer`) VALUES
+(32, 'kdsdakadjk', 'kdklsdajldak', 83, 'EventsImages/1524002379/download (1).jpeg', 'q'),
+(31, 'My Event', 'kdasldlksjasldkjaslk', 74, 'EventsImages/1524002068/1_wqYF-8Dmh7LhtLkKfERc3Q.png', 'q');
 
 -- --------------------------------------------------------
 
@@ -69,7 +82,7 @@ CREATE TABLE `locations` (
   `id` int(11) NOT NULL,
   `name` varchar(255) CHARACTER SET latin1 DEFAULT NULL,
   `general_type` int(11) DEFAULT NULL,
-  `description` text CHARACTER SET latin1,
+  `description` longtext CHARACTER SET latin1 DEFAULT NULL,
   `lat` varchar(255) CHARACTER SET latin1 DEFAULT NULL,
   `lng` varchar(255) CHARACTER SET latin1 DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -108,7 +121,7 @@ INSERT INTO `locations` (`id`, `name`, `general_type`, `description`, `lat`, `ln
 (27, 'AGHA KHAN UNIVERSITY', 1, 'Welcome to Medical Câ€‹entres The Aga Khan University Hospital Medical Centres, offer doctor clinics, laboratory testing and in some cases, pharmacy services. It is designed to provide primary healthcare services to patients near their home. These Medical C', '33.764674', '72.767566'),
 (28, 'AGHA KHAN HOSPITAL', 4, 'Welcome to Medical Câ€‹entres The Aga Khan University Hospital Medical Centres, offer doctor clinics, laboratory testing and in some cases, pharmacy services. It is designed to provide primary healthcare services to patients near their home. These Medical C', '33.764674', '72.767566'),
 (29, 'MCB BANK', 3, 'MCB Bank Ltd shares are traded on the Pakistan Stock Exchange . The information presented within MCB Investor Relations is obtained by MCB Bank from accurate and reliable sources. All information is provided on an as-is basis without any kind of warranty ', '33.764693', '72.767627'),
-(30, 'CAPRI CONTINALTAL BAKERS', 2, 'Our main goal is to create an atmosphere that allows the guest to feel, "Truly At Home - Away from Home." Location, flexibility, technology and service define the meeting spaces at Capri Continental Wah Cantt, making it the ideal venue for any occasion. W', '33.765036', '72.767719'),
+(30, 'CAPRI CONTINALTAL BAKERS', 2, 'Our main goal is to create an atmosphere that allows the guest to feel, \"Truly At Home - Away from Home.\" Location, flexibility, technology and service define the meeting spaces at Capri Continental Wah Cantt, making it the ideal venue for any occasion. W', '33.765036', '72.767719'),
 (31, 'KHAWAJA MADICAL HALL', 4, 'Medicine & Health Buy medicine online in Pakistan without any hassle. With MedicalStore.com.pk â€“Pakistanâ€™s prominent online pharmacy & medical store, you can buy medicine and pharmaceutical products online in cheap prices and choose from a wide array of m', '33.765103', '72.767037'),
 (32, 'MCB BANK', 3, 'MCB Bank Ltd shares are traded on the Pakistan Stock Exchange . The information presented within MCB Investor Relations is obtained by MCB Bank from accurate and reliable sources. All information is provided on an as-is basis without any kind of warranty ', '33.765135', '72.766987'),
 (33, 'MARHABA BAKERS', 2, 'Donâ€™t forget to check out our fresh and sweet cakes for special occasions! marhaba bakers makes mouth watering, fresh and delicious Pizzas, Cakes, Salads, Cookies, Fast food items and lots of other stuff. From small towns to distant locations, millions of', '33.765543', '72.766469'),
@@ -121,7 +134,7 @@ INSERT INTO `locations` (`id`, `name`, `general_type`, `description`, `lat`, `ln
 (40, 'NASHEMAN SCHOOOL', 1, NULL, '33.743395', '72.790494'),
 (41, 'MASHAL COLLAGE', 1, 'Mashal Degree College had its humble beginning in 1993 in the building of Nasheman (School for Special Education, Wah Cantt). It was temporarily shifted to Welfare School in 1995 owing to the rapid increase in the number of students. Now it is a constitue', '33.741547', '72.792452'),
 (42, 'WAH MEDICAL COLLAGE', 1, 'Wah Medical College was established in December 2003 as a continuous effort of POF Board to provide quality education in this part of the Country. This happens to be the first Medical College as you enter in Punjab from KPK. It started off in a makeshift ', '33.747713', '72.788596'),
-(43, 'POFIT COLLAGE', 1, '"POFIT is committed to provide Quality Technical Education to: Officers, Staff and Workers of POF in order to groom them to shoulder their responsibilities in an efficient & effective manner. POFIT will extend its facilities to other Public Sector & Priva', '33.745419', '72.784008'),
+(43, 'POFIT COLLAGE', 1, '\"POFIT is committed to provide Quality Technical Education to: Officers, Staff and Workers of POF in order to groom them to shoulder their responsibilities in an efficient & effective manner. POFIT will extend its facilities to other Public Sector & Priva', '33.745419', '72.784008'),
 (44, 'WAH ENGEENIRNG COLLAGE', 1, 'Wah Engineering College, a constituent college of the University of Wah, was established in 2004 and has been offering 4 years degree program in the fields of Electrical, Mechanical, Mechatronics, Civil and Chemical Engineering. Moreover, the College has ', '33.747848', '72.784953'),
 (45, 'CP PUBLIC SCHOOL', 1, 'Primary education falls in the purview of the Cantt Board. As such 03 x CB Schools, one each in Officers Colony, Nawababad and Lala Rukh are being run by the Cantonment Board Wah. These schools are housed in proper buildings and imparting education from N', '33.747631', '72.753289'),
 (46, 'CB PUBLIC COLLAGE', 1, 'Primary education falls in the purview of the Cantt Board. As such 03 x CB Schools, one each in Officers Colony, Nawababad and Lala Rukh are being run by the Cantonment Board Wah. These schools are housed in proper buildings and imparting education from N', '33.747631', '72.753289'),
@@ -572,6 +585,31 @@ INSERT INTO `sub_categories` (`id`, `name`, `general_type`) VALUES
 (14, 'stationary', 7),
 (15, 'chemist', 5);
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `email`, `password`) VALUES
+(1, 'Sultan', 'sultanjaffar@gmail.com', 'password'),
+(2, 'Danial', 'metalcool07@yahoo.com', ''),
+(3, 'Dummy', 'dummy@dummy.com', ''),
+(4, 'c', 'c@c.com', ''),
+(5, 'm', 'm@m.com', ''),
+(6, 'q', 'm@x.com', 'password');
+
 --
 -- Indexes for dumped tables
 --
@@ -613,6 +651,12 @@ ALTER TABLE `sub_categories`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -621,31 +665,44 @@ ALTER TABLE `sub_categories`
 --
 ALTER TABLE `categories`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
 --
 -- AUTO_INCREMENT for table `events`
 --
 ALTER TABLE `events`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+
 --
 -- AUTO_INCREMENT for table `locations`
 --
 ALTER TABLE `locations`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=142;
+
 --
 -- AUTO_INCREMENT for table `locationsx`
 --
 ALTER TABLE `locationsx`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=139;
+
 --
 -- AUTO_INCREMENT for table `location_type`
 --
 ALTER TABLE `location_type`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=147;
+
 --
 -- AUTO_INCREMENT for table `sub_categories`
 --
 ALTER TABLE `sub_categories`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

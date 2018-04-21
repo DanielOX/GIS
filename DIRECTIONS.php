@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>GIS</title>
+    <?php include('includes/auth_check.php'); ?>
     <?php include('lib.php'); ?>
   </head>
 <style media="screen">

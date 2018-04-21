@@ -2,7 +2,7 @@
 
 $_id = $_GET['id'];
 $sub_id = $_GET['sub_id'];
-$conn = mysqli_connect('localhost','root','','gis_data_wah_cantt');
+$conn = mysqli_connect('127.0.0.1','root','','gis_data_wah_cantt');
 if($conn)
 {
   $QUERY = "SELECT * FROM locations WHERE id IN (SELECT location_id FROM location_type WHERE sub_type=$sub_id )";
@@ -15,6 +15,8 @@ if($conn)
   <head>
     <meta charset="utf-8">
     <title></title>
+    <?php include('includes/auth_check.php'); ?>
+
     <?php include('lib.php'); ?>
   </head>
 
