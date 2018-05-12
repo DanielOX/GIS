@@ -5,9 +5,8 @@ $sub_id = $_GET['sub_id'];
 $conn = mysqli_connect('127.0.0.1','root','','gis_data_wah_cantt');
 if($conn)
 {
-  $QUERY = "SELECT * FROM locations WHERE id IN (SELECT location_id FROM location_type WHERE sub_type=$sub_id )";
+  $QUERY = "SELECT * FROM locations WHERE id IN (SELECT location_id FROM location_type WHERE sub_type=$_id)";
   $RESULT = mysqli_query($conn,$QUERY);
-
 }
 ?>
 <!DOCTYPE html>
@@ -18,6 +17,9 @@ if($conn)
     <?php include('includes/auth_check.php'); ?>
 
     <?php include('lib.php'); ?>
+    <script type="text/javascript" src="cluster.js">
+
+    </script>
   </head>
 
 <style media="screen">
@@ -113,7 +115,9 @@ transform:scale(1);
                       $Q_Result = mysqli_query($conn,$QUERY);
                       $rowx = mysqli_fetch_array($Q_Result);
                       echo '<h4>Locations Of '.$rowx['name'].'</h4>';
+
                       $i=1;
+
                       echo "<li onclick='colorChange(".$i.")' data-id='".$i."' class='location_name' >";
                       echo ucfirst(strtolower($row['name']));
                       echo '</li>';
@@ -131,39 +135,9 @@ transform:scale(1);
               </div>
               <div class="col-sm-12 col-xs-12 col-md-6 col-lg-6" style="position:fixed;left:50%;top:9%" >
                   <div id="myMap"></div>
-
             </div>
 
           </div>
-
-
-
-
-          <!-- Button trigger modal -->
-          <button   style="display:none!important;" id="modal-opener" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
-            Launch demo modal
-          </button>
-
-  <!-- Modal -->
-  <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
 
 
 
@@ -189,7 +163,6 @@ http2.onreadystatechange = function()
       {
           var parsed = JSON.parse(this.responseText);
           var increment = 1;
-          console.log(parsed);
           parsed.forEach(function(loc){
             var marker = new google.maps.Marker({
                 position:new google.maps.LatLng(loc.lat,loc.lng),
@@ -197,14 +170,13 @@ http2.onreadystatechange = function()
                 title:loc.name,
                 map:map
             });
+            var path = 'http://localhost/GIS/location_pics/';
+            path += loc.image;
             markersCluster.push(marker);
               var infoBOX = new google.maps.InfoWindow({
-                content:'<div class="content" style="width:350px;height:180px"><p class="title" style="font-weight:bold">'+ loc.name +'</p><p class="Description">'+loc.description+'</p> <small class="pull-right">By:</small>&nbsp;<small style="font-size:14px">GIS</small></div>'
+                content:'<div class="content" style="width:350px;height:180px"><p class="title" style="font-weight:bold">'+ loc.name +'</p><div style="background-size:cover;background-image:url('+path+');background-position:center center;width:100%;height:150px;"></div><p class="Description">'+loc.description+'</p> <small class="pull-right">By:</small>&nbsp;<small style="font-size:14px">GIS</small></div>'
             });
-            marker.addListener('mouseover',function(){
-              infoBOX.open(map,marker);
 
-            });
             infoBOX.close(map,marker);
             marker.addListener('mouseout',function(){
             });
@@ -216,7 +188,6 @@ http2.onreadystatechange = function()
             markerArray[increment] = marker;
             increment++;
           });
-
 
 
 

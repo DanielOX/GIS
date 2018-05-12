@@ -1,7 +1,8 @@
 <?php
 include('includes/config.php');
-$QUERY  = "SELECT * FROM events ORDER BY id DESC LIMIT 9";
+$QUERY  = "SELECT * FROM events where approved = 1 ORDER BY id DESC LIMIT 8";
 $RESULT = mysqli_query($conn,$QUERY);
+
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -60,7 +61,9 @@ li
 
         while($row = mysqli_fetch_array($RESULT))
         {
+
           echo '
+          <div class="margin-left:40px">
             <div class=" lo col-xs-12 col-sm-12 col-md-3 col-lg-3">
           <div data-aos="fade-up" data-aos-duration="1200" class="card" style="width: 18rem;">
   <img class="card-img-top" style="min-width:286px;min-height:279.69px;max-width:286px;max-height:279.69px;" src="Events/'.$row['image'].'" alt="Card image cap">
@@ -69,6 +72,7 @@ li
     <p class="card-text">'.$row['description'].'</p>
     <a href="#" class="btn btn-primary">View Details <i class="fa fa-sign-out"></i> </a>
   </div>
+</div>
 </div>
 </div>
 ';
@@ -93,47 +97,41 @@ window.onload = function(){
 
     AOS.init();
 
-    var http = new XMLHttpRequest(); //create an instance or object of XMLHttpRequest() constructor function
+    var http = new XMLHttpRequest();
 
-    http.onreadystatechange=function() // <= CALLBACK FUNCTION whenever the http request or response state chnages this callback function is executed
+    http.onreadystatechange=function()
     {
-      if(this.readyState== 4 && this.status == 200)// Checks if the destination is found and response has been successfully recieved!
+      if(this.readyState== 4 && this.status == 200)
       {
 
-          var parsed = JSON.parse(this.responseText);
-                                                                //converts string json response to Javascript Object
-          parsed.forEach(function(loc){ //loc is the current index holder
+          var parsed =   JSON.parse(this.responseText);
+          parsed.forEach(function(loc){
               var marker = new google.maps.Marker({
                   position:new google.maps.LatLng(loc.lat,loc.lng),
                   title:loc.name,
                   animation:google.maps.Animation.DROP,
                   map:map
               });
-              var stringContent = '<div class="content"><p class="title" style="font-weight:bold;">'+ loc.name +'</p><p class="Description">'+loc.description+'</p> <small class="pull-right">By:</small>&nbsp;<small style="font-size:14px">GIS</small></div>';
+              var path = 'http://localhost/GIS/location_pics/';
+              path = path + loc.image;
+              var stringContent = '<div class="content" style="width:350px;height:180px"><p class="title" style="font-weight:bold">'+ loc.name +'</p><div style="background-size:cover;background-image:url('+path+');background-position:center center;width:100%;height:150px;"></div><p class="Description">'+loc.description+'</p> <small class="pull-right">By:</small>&nbsp;<small style="font-size:14px">GIS</small></div>'
               var infoBOX = new google.maps.InfoWindow({
                   content:stringContent
               });
               markers.push(marker);
-
-              marker.addListener('mouseover',function(){
+              marker.addListener('click',function(){
                 infoBOX.open(map,marker);
 
               });
-              marker.addListener('mouseout',function(){
-                infoBOX.close(map,marker);
 
-              });
 
-          });
+          }); // loop end
           var markerCluster = new MarkerClusterer(map,markers,{imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
-
       }
     }
 
-    http.open('GET','Events/ret.php',true); //This function is used for storing info of request in Header Object of request;PREPARING THE REQUEST TO DATA FOR OUT ASYNC or AJAX REQUEST
+    http.open('GET','ret.php',true); 
     http.send();
-
-
 };
 
   var myMap = document.getElementById('myMap');
@@ -154,7 +152,7 @@ window.onload = function(){
       lat:_lat,
       lng:_lng
     };
-    map.setZoom(24);
+    map.setZoom(20);
     map.panTo( _location);
 
   }
@@ -188,7 +186,6 @@ window.onload = function(){
                       data += '<li onclick="getLatLng('+log.lat+','+log.lng+')" class="search-result">';
                       data += '<a>';
                       data += log.name;
-                      data += '<a>';
                       data += '</a>';
                       data += '</li>';
                   });

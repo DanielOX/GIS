@@ -143,19 +143,17 @@
             });
         };
 
-          /*
-            AJAX => Asynchronous Javascript And XML Request Initialized when document is loaded
-          */
+
 
         window.onload = function(){
-            var http = new XMLHttpRequest(); //create an instance or object of XMLHttpRequest() constructor function
+            var http = new XMLHttpRequest();
 
-            http.onreadystatechange=function() // <= CALLBACK FUNCTION whenever the http request or response state chnages this callback function is executed
+            http.onreadystatechange=function()
             {
-              if(this.readyState== 4 && this.status == 200)// Checks if the destination is found and response has been successfully recieved!
+              if(this.readyState== 4 && this.status == 200)
               {
-                  var parsed = JSON.parse(this.responseText); //converts string json response to Javascript Object
-                  parsed.forEach(function(loc){ //loc is the current index holder
+                  var parsed = JSON.parse(this.responseText);
+                  parsed.forEach(function(loc){
                       var marker = new google.maps.Marker({
                           position:new google.maps.LatLng(loc.lat,loc.lng),
                           title:loc.name,
@@ -192,7 +190,7 @@
                   var MarkerCluster = new MarkerClusterer(map,markers,{imagePath:'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
               }
             }
-            http.open('GET','ret.php',true); //This function is used for storing info of request in Header Object of request;PREPARING THE REQUEST TO DATA FOR OUT ASYNC or AJAX REQUEST
+            http.open('GET','ret.php',true);
             http.send();
         };
 
@@ -220,12 +218,11 @@
                 var data = "";
                   if(parsed[0] !=  "0" )
                   {
-                    console.log(parsed[0]);
+
                     parsed.forEach(function(log){
                         data += '<li onclick="getLatLng(\''+log.name+'\','+log.id+')" class="search-result">';
                         data += '<a>';
                         data += log.name;
-                        data += '<a>';
                         data += '</a>';
                         data += '</li>';
                     });
